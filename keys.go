@@ -29,8 +29,6 @@ func LoadKeyPair(w Wallet) (sign.PrivateKey, sign.PublicKey, error) {
 	if err != nil {
 		return nil, nil, err
 	}
-
-	scheme := schemes.ByName("Dilithium3")
 	privKey, err := scheme.UnmarshalBinaryPrivateKey(privBytes)
 	if err != nil {
 		return nil, nil, err
