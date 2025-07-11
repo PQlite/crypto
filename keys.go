@@ -5,7 +5,7 @@ import (
 	"encoding/hex"
 	"log"
 
-	"import "github.com/cloudflare/circl/sign"
+	"github.com/cloudflare/circl/sign"
 )
 
 
