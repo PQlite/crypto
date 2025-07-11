@@ -1,6 +1,6 @@
 module github.com/PQlite/crypto
 
-go 1.24.5
+go 1.24.4
 
 require (
 	github.com/cloudflare/circl v1.6.1
