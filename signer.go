@@ -32,28 +32,16 @@ func Sign(unsignTransaction UnsignTransaction, priv sign.PrivateKey, pub sign.Pu
 		To:   unsignTransaction.To, Amount: unsignTransaction.Amount,
 		Timestamp: unsignTransaction.Timestamp,
 		Nonce:     unsignTransaction.Nonce,
-		Signature: hex.EncodeToString(sig),
-		PubKey:    hex.EncodeToString(pubBytes),
+		Signature: sig,
+		PubKey:    pubBytes,
 	}, nil
 }
 
 // Verify робить перевірку підпису транзакції і власника гаманця з поля From
 func Verify(transaction Transaction) bool {
-	pubKeyBytes, err := hex.DecodeString(transaction.PubKey)
-	if err != nil {
-		log.Println("помилка hex.DecodeString (PubKey): ", err)
-		return false
-	}
-
-	pubKey, err := scheme.UnmarshalBinaryPublicKey(pubKeyBytes)
+	pubKey, err := scheme.UnmarshalBinaryPublicKey(transaction.PubKey)
 	if err != nil {
 		log.Println("помилка UnmarshalBinaryPublicKey: ", err)
-		return false
-	}
-
-	signatureBytes, err := hex.DecodeString(transaction.Signature)
-	if err != nil {
-		log.Println("помилка hex.DecodeString (Signature): ", err)
 		return false
 	}
 
@@ -67,10 +55,10 @@ func Verify(transaction Transaction) bool {
 	rawDataHash := sha3.Sum224(rawData)
 
 	// check that 'from' belongs to the transaction creator
-	pubKeySum := sha3.Sum224(pubKeyBytes)
+	pubKeySum := sha3.Sum224(transaction.PubKey)
 	if hex.EncodeToString(pubKeySum[:]) != transaction.From {
 		return false
 	}
 
-	return scheme.Verify(pubKey, rawDataHash[:], signatureBytes, nil)
+	return scheme.Verify(pubKey, rawDataHash[:], transaction.Signature, nil)
 }

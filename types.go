@@ -14,8 +14,8 @@ type Transaction struct {
 	Amount    float32 `json:"amount"`
 	Timestamp int64   `json:"timestamp"`
 	Nonce     int     `json:"nonce"`
-	Signature string  `json:"signature"`
-	PubKey    string  `json:"pubkey"`
+	Signature []byte  `json:"signature"`
+	PubKey    []byte  `json:"pubkey"`
 }
 
 type Wallet struct {
