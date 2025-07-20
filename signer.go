@@ -13,12 +13,12 @@ func Sign(binPriv []byte, message []byte) ([]byte, error) {
 	return scheme.Sign(priv, message, nil), nil
 }
 
-func Verify(binPub []byte, message []byte, sig []byte) bool {
+func Verify(binPub []byte, message []byte, sig []byte) (bool, error) {
 	pub, err := scheme.UnmarshalBinaryPublicKey(binPub)
 	if err != nil {
 		log.Println("помилка UnmarshalBinaryPublicKey: ", err)
-		return false
+		return false, err
 	}
 
-	return scheme.Verify(pub, message, sig, nil)
+	return scheme.Verify(pub, message, sig, nil), nil
 }
