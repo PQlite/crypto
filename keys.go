@@ -2,16 +2,12 @@
 package crypto
 
 import (
-	// "encoding/hex"
-	"log"
-
 	"github.com/cloudflare/circl/sign"
 )
 
 func Create() (sign.PublicKey, sign.PrivateKey, error) {
 	pub, priv, err := scheme.GenerateKey()
 	if err != nil {
-		log.Println("помилка створення пари priv/pub ", err)
 		return nil, nil, err
 	}
 

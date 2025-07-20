@@ -1,14 +1,9 @@
 package crypto
 
-import (
-	"log"
-)
-
 func Sign(binPriv []byte, message []byte) ([]byte, error) {
 	priv, err := scheme.UnmarshalBinaryPrivateKey(binPriv)
 	if err != nil {
-		log.Println("помилка отримання priv: ", err)
-		return []byte(""), err
+		return nil, err
 	}
 	return scheme.Sign(priv, message, nil), nil
 }
@@ -16,7 +11,6 @@ func Sign(binPriv []byte, message []byte) ([]byte, error) {
 func Verify(binPub []byte, message []byte, sig []byte) (bool, error) {
 	pub, err := scheme.UnmarshalBinaryPublicKey(binPub)
 	if err != nil {
-		log.Println("помилка UnmarshalBinaryPublicKey: ", err)
 		return false, err
 	}
 
