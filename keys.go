@@ -2,36 +2,9 @@
 package crypto
 
 import (
-	"github.com/cloudflare/circl/sign"
+	"crypto/ed25519"
 )
 
-func Create() (sign.PublicKey, sign.PrivateKey, error) {
-	pub, priv, err := scheme.GenerateKey()
-	if err != nil {
-		return nil, nil, err
-	}
-
-	return pub, priv, err
+func Create() (ed25519.PublicKey, ed25519.PrivateKey, error) {
+	return ed25519.GenerateKey(nil)
 }
-
-// LoadKeyPair loads private and public key from Wallet object
-// func LoadKeyPair(w Wallet) (sign.PrivateKey, sign.PublicKey, error) {
-// 	privBytes, err := hex.DecodeString(w.Priv)
-// 	if err != nil {
-// 		return nil, nil, err
-// 	}
-// 	pubBytes, err := hex.DecodeString(w.Pub)
-// 	if err != nil {
-// 		return nil, nil, err
-// 	}
-// 	privKey, err := scheme.UnmarshalBinaryPrivateKey(privBytes)
-// 	if err != nil {
-// 		return nil, nil, err
-// 	}
-// 	pubKey, err := scheme.UnmarshalBinaryPublicKey(pubBytes)
-// 	if err != nil {
-// 		return nil, nil, err
-// 	}
-//
-// 	return privKey, pubKey, nil
-// }
