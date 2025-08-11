@@ -2,4 +2,4 @@ package crypto
 
 import "github.com/cloudflare/circl/sign/schemes"
 
-var scheme = schemes.ByName("Dilithium3")
+var scheme = schemes.ByName("Dilithium2")
