@@ -2,6 +2,8 @@ package crypto
 
 import "crypto/ed25519"
 
+// TODO: зробити перевірку ключа, і повертати помилку, в разі проблем
+
 func Sign(priv []byte, message []byte) ([]byte, error) {
 	return ed25519.Sign(priv, message), nil
 }
